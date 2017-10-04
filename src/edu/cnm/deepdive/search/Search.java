@@ -48,16 +48,16 @@ public class Search {
     } catch (NumberFormatException ex) {
       System.out.printf(resources.getString(PARSE_ERROR_MESSAGE_KEY));
       System.out.printf(resources.getString(USAGE_MESSAGE_KEY), 
-          Generator.class.getName());
+          Search.class.getName());
       throw ex;
     } catch (IllegalArgumentException ex) {
       System.out.printf(resources.getString(VALUE_ERROR_MESSAGE_KEY));
       System.out.printf(resources.getString(USAGE_MESSAGE_KEY), 
-          Generator.class.getName());
+          Search.class.getName());
       throw ex;
     } catch (ArrayIndexOutOfBoundsException ex) {
       System.out.printf(resources.getString(USAGE_MESSAGE_KEY), 
-          Generator.class.getName());
+          Search.class.getName());
       throw ex;
     }
   }
@@ -105,18 +105,18 @@ public class Search {
   
   private static int findValue(int needle, Integer[] haystack) {
     int start = 0;
-    int end = haystack.length;
+    int end = haystack.length - 1;
    
-    while (end > start) {
+    while (start <= end) {
       int midpoint = (start + end) / 2;
       int test = haystack[midpoint];
 
       if (test == needle) {
         return midpoint;
       } else if (test < needle) {
-        return midpoint + 1;
+        start = midpoint + 1;
       } else {
-        return midpoint -1;
+        end = midpoint -1;
       }
     }
     return -1; 
