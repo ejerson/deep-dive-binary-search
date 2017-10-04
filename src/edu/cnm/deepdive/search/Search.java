@@ -105,9 +105,9 @@ public class Search {
   
   private static int findValue(int needle, Integer[] haystack) {
     int start = 0;
-    int end = haystack.length - 1;
+    int end = haystack.length;
    
-    while (start <= end) {
+    while (start < end) {
       int midpoint = (start + end) / 2;
       int test = haystack[midpoint];
 
@@ -116,7 +116,7 @@ public class Search {
       } else if (test < needle) {
         start = midpoint + 1;
       } else {
-        end = midpoint -1;
+        end = midpoint;
       }
     }
     return -1; 
