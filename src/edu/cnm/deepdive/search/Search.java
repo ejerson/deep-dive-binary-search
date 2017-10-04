@@ -21,6 +21,7 @@ public class Search {
     try {
       ResourceBundle resources = getBundle(RESOURCE_BUNDLE_NAME);
       int needle = getSearchValue(args, resources);
+      System.out.println(needle);
       Integer[] haystack = readValues(resources);
       int foundPosition = findValue(needle, haystack);
       if (foundPosition >= 0) {
@@ -33,6 +34,7 @@ public class Search {
     } catch (Exception ex) {
       // Do nothing.
     }
+    
   }
 
   private static int getSearchValue(String[] args, ResourceBundle resources) 
@@ -81,26 +83,46 @@ public class Search {
     }
   }
   
+//  private static int findValue(int needle, Integer[] haystack) {
+//    return findValue(needle, haystack, 0, haystack.length);
+//  }
+  
+//  private static int findValue(int needle, Integer[] haystack, 
+//      int start, int end) {
+//    if (end <= start) {
+//      return ~start;
+//    }
+//    int midpoint = (start + end) >> 1;
+//    int test = haystack[midpoint];
+//    if (test == needle) {
+//      return midpoint;
+//    }
+//    if (test < needle) {
+//      return findValue(needle, haystack, midpoint + 1, end);
+//    }
+//    return findValue(needle, haystack, start, midpoint);
+//  }
+  
   private static int findValue(int needle, Integer[] haystack) {
-    return findValue(needle, haystack, 0, haystack.length);
+    int start = 0;
+    int end = haystack.length;
+    
+    int indexLocation = 0;
+ 
+    while (end > start) {
+      int midpoint = (start + end) / 2;
+      int test = haystack[midpoint];
+
+      if (test == needle) {
+        return midpoint;
+      } else if (test < needle) {
+        return midpoint ;
+      } else {
+        return midpoint;
+      }
+    }
+    return indexLocation;
   }
-  
-  private static int findValue(int needle, Integer[] haystack, 
-      int start, int end) {
-    if (end <= start) {
-      return ~start;
-    }
-    int midpoint = (start + end) >> 1;
-    int test = haystack[midpoint];
-    if (test == needle) {
-      return midpoint;
-    }
-    if (test < needle) {
-      return findValue(needle, haystack, midpoint + 1, end);
-    }
-    return findValue(needle, haystack, start, midpoint);
-  }
-  
 }
 
 
